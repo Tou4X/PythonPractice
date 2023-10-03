@@ -1,0 +1,68 @@
+
+
+class BankAccount:
+    # don't forget to add some default values for these parameters!
+    allAccts = []
+    
+
+    def __init__(self, int_rate, balance, user_name): 
+        self.int_rate = int_rate
+        self.balance = balance
+        self.user_name = user_name
+        BankAccount.allAccts.append(self)
+
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"${amount} has been deposted!")
+        print(f"${self.balance}")
+        
+    def withdraw(self, amount):
+        
+        if amount > self.balance:
+            print(f"Warning You are about to over-draft ${self.balance - amount}")
+        else:
+            self.balance -= amount
+            print(f"${amount} has been withdrawn! You have ${self.balance} remaining.")
+    def display_account_info(self):
+        print("User:",self.user_name)
+        print(f"Balance:${self.balance}")
+        # print(f"Interest:${self.balance*self.int_rate}")
+
+    def yield_interest(self):
+        intrst = self.balance * self.int_rate
+        yi = self.balance + intrst
+        print(yi)
+
+    @classmethod
+    def all_bal(cls):
+        sum = 0
+        for account in cls.allAccts:
+            sum += account.balance
+            # print(cls.allAcct)
+        return sum
+        
+
+ac1 = BankAccount(.05,1000, "Anines")
+ac2 = BankAccount(.05,3500, "Malco")
+ac3 = BankAccount(.05,6500, "Numa")
+
+
+
+print()
+
+ac1.deposit(450)
+ac1.deposit(400)
+ac1.deposit(550)
+ac1.withdraw(500)
+
+ac2.withdraw(30)
+
+ac1.yield_interest()
+ac2.yield_interest()
+ac3.yield_interest()
+
+
+
+# ac1.display_account_info()
+# ac2.display_account_info()
+# ac3.display_account_info()
